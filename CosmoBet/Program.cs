@@ -200,9 +200,50 @@ namespace CosmoBet.Completo
 
         internal class Profile
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public DateTime Birthdate { get; set; }
+            private string _username;
+
+            public string Username
+            {
+                get { return _username; }
+                set
+                {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        throw new ArgumentException("O NOME NÃO PODE SER VAZIO");
+                    }
+                    _username = value;
+                }
+            }
+
+            private string _password;
+
+            public string Password
+            {
+                get { return _password; }
+                set
+                {
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        throw new ArgumentException("A SENHA NÃO PODE SER VAZIA");
+                    }
+                    _password = value;
+                }
+            }
+
+            private DateTime _birthdate;
+            public DateTime Birthdate
+            {
+                get { return _birthdate; }
+                set
+                {
+                    if (value == DateTime.MinValue)
+                    {
+                        throw new ArgumentException("A DATA NÃO PODE SER VAZIA");
+                    }
+                    _birthdate = value;
+                }
+            }
+
             public double InitialDeposit { get; set; }
 
             public Profile(string username, string password, DateTime birthdate, double deposit)
